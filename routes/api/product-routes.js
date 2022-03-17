@@ -8,7 +8,10 @@ const { Product, Category, Tag, ProductTag } = require('../../models');
 router.get('/', (req, res) => {
   // find all products
   Product.findAll({
-    include: [Category, Tag]
+    include: [
+      {model: Category}, 
+      {model: Tag}
+    ]
   })
   .then(dbPostData => res.json(dbPostData))
   .catch(err => {
@@ -117,7 +120,7 @@ router.delete('/:id', (req, res) => {
   })
   .then(dbPostData => {
     if (!dbPostData) {
-      res.status(404).json({ message: 'No Product found with this id'})
+      res.status(404).json({ message: 'No Products found with this id'})
     }
   })
 });
