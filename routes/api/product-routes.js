@@ -13,7 +13,7 @@ router.get('/', (req, res) => {
       {model: Tag}
     ]
   })
-  .then(dbPostData => res.json(dbPostData))
+  .then(dbProductData => res.json(dbProductData))
   .catch(err => {
     console.log(err);
     res.status(500).json(err);
@@ -29,7 +29,7 @@ router.get('/:id', (req, res) => {
     },
     include: [Category, Tag]
   })
-  .then(dbPostData => res.json(dbPostData))
+  .then(dbProductData => res.json(dbProductData))
   .catch(err => {
     console.log(err);
     res.status(500).json(err);
@@ -113,13 +113,13 @@ router.put('/:id', (req, res) => {
 
 router.delete('/:id', (req, res) => {
   // delete one product by its `id` value
-  Post.destroy({
+  Product.destroy({
     where: {
       id: req.params.id
     }
   })
-  .then(dbPostData => {
-    if (!dbPostData) {
+  .then(dbProductData => {
+    if (!dbProductData) {
       res.status(404).json({ message: 'No Products found with this id'})
     }
   })
